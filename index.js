@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const connection = require('./database/database');
+const {connection} = require('./database/database');
+const perguntaModel = require('./database/Question')
 const app = express();
 
 connection.authenticate()
