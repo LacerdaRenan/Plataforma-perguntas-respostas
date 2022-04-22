@@ -3,15 +3,20 @@
     <%- include('partials/navBar.ejs'); %>
     <br>
     <div class="container">
+        <a href="/ask" class="btn btn-primary">Have a Question?</a>
+        <hr>
+        <h1>Questions</h1>
         <% perguntas.forEach(p=>{ %>
             <div class="card">
                 <div class="card-body">
                     <h3><%= p.titulo %></h3>
+                    <span><%= p.createdAt %></span>
                 </div>
                 <div class="card-footer">
                     <button class="btn btn-primary">Answer</button>
                 </div>
             </div>
+            <br>
         <% }) %>
     </div>
 </body>

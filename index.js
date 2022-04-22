@@ -20,7 +20,8 @@ app.set('view engine','ejs');
 
 app.get('/',(req,res)=>{
     //SELECT * FROM question;
-    Quest.findAll({raw:true})
+    //Ordenando do mais recente para o mais antigo via id
+    Quest.findAll({raw:true, order:[['id','DESC']]})
         .then((q)=>{
             res.render('index',{
                 perguntas:q
@@ -43,6 +44,21 @@ app.post('/save-quest', (req,res)=>{
     }).then(()=>{
         console.log('new data included')
         res.redirect('/');
+    })
+})
+
+app.get('/quest/:id', (req,res)=>{
+    let id = req.params.id;
+    Quest.findOne({
+        where:{
+            id:id
+        }
+    }).then((q)=>{
+        if(q){
+            res.render('quest');
+        }else{
+            res.redirect('/');
+        }
     })
 })
 
