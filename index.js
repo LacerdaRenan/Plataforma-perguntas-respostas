@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const {connection} = require('./database/database');
-const Quest = require('./database/Question')
+const Quest = require('./database/Question');
+const Answer = require('./database/Answer')
 const app = express();
 
 //Conectando com banco de dados
@@ -55,7 +56,9 @@ app.get('/quest/:id', (req,res)=>{
         }
     }).then((q)=>{
         if(q){
-            res.render('quest');
+            res.render('quest',{
+                pergunta:q
+            });
         }else{
             res.redirect('/');
         }
