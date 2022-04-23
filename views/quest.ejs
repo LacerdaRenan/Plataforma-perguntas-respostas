@@ -4,13 +4,20 @@
     <div class="container">
         <hr>
         <h1><%= pergunta.titulo %></h1>
-        <p><%= pergunta.descricao %></p>
+        <p style="font-weight: bold;"><%= pergunta.descricao %></p>
         <hr>
-        <form action="">
+
+        <h3>Answers</h3>
+        <% respostas.forEach(r=>{ %>
+            <hr>
+            <p><%= r.corpo %></p>
+        <% }) %>
+
+        <form method="POST" action="/save-answer">
             <label>Your Answer</label>
-            <textarea placeholder="Type here" name="corpo" class="form-control" cols="30" rows="10"></textarea>
+            <textarea placeholder="Type here" name="Answer" class="form-control"></textarea>
             <br>
-            <input type="text" name="questID" value="<%= pergunta.id %>" >
+            <input type="hidden" name="AnswerID" value="<%= pergunta.id %>" >
             <button type="submit" class="btn btn-success">Send</button>
         </form>
     </div>

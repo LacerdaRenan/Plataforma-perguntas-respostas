@@ -55,13 +55,32 @@ app.get('/quest/:id', (req,res)=>{
             id:id
         }
     }).then((q)=>{
-        if(q){
-            res.render('quest',{
-                pergunta:q
-            });
-        }else{
-            res.redirect('/');
-        }
+        Answer.findAll({
+            where:{
+                perguntaID:id
+            }
+        }).then((a)=>{
+            if(q){
+                res.render('quest',{
+                    pergunta:q,
+                    respostas:a
+                });
+            }else{
+                res.redirect('/');
+            }
+        })
+    })
+})
+
+app.post('/save-answer', (req,res)=>{
+    let answer = req.body.Answer;
+    let id = req.body.AnswerID;
+
+    Answer.create({
+        corpo:answer,
+        perguntaID:id
+    }).then(()=>{
+        res.redirect(`/quest/${id}`);
     })
 })
 
